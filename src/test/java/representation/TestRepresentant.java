@@ -83,5 +83,47 @@ public class TestRepresentant {
 
 	}
 	
-	
+	@Test
+        // On teste le mois du CA entre 0 et11
+	public void testMoisCorrect() {
+                try {
+			// On enregistre un mois négatif ou plus grand que 11, que doit-il se passer ?
+			// On s'attend à recevoir une exception
+			r.enregistrerCA(12, 10000f);
+			// Si on arrive ici, c'est une erreur, le test doit échouer
+			fail("Un mois négatif ou supérieur à 11 doit générer une exception"); // Forcer l'échec du test			
+		} catch (IllegalArgumentException e) {
+			// Si on arrive ici, c'est normal, c'est le comportement attendu
+		}
+        }
+        
+        @Test
+	public void testSalaireMensuelMois() {
+                float POURCENTAGE= 0.1f;
+		try {
+			// On enregistre un mois négatif ou plus grand que 11, que doit-il se passer ?
+			// On s'attend à recevoir une exception
+			r.salaireMensuel(-1,POURCENTAGE);
+			// Si on arrive ici, c'est une erreur, le test doit échouer
+			fail("Un mois négatif ou supérieur à 11 doit générer une exception"); // Forcer l'échec du test			
+		} catch (IllegalArgumentException e) {
+			// Si on arrive ici, c'est normal, c'est le comportement attendu
+		}
+                
+        }
+        
+        @Test
+	public void testSalaireMensuelPourcentageN() {
+                float POURCENTAGE= -0.1f;
+		try {
+			// On enregistre un pourcentage négatif, que doit-il se passer ?
+			// On s'attend à recevoir une exception
+			r.salaireMensuel(0,POURCENTAGE);
+			// Si on arrive ici, c'est une erreur, le test doit échouer
+			fail("Un mois négatif ou supérieur à 11 doit générer une exception"); // Forcer l'échec du test			
+		} catch (IllegalArgumentException e) {
+			// Si on arrive ici, c'est normal, c'est le comportement attendu
+		}
+                
+        }
 }

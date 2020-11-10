@@ -1,19 +1,27 @@
 package representation;
+import java.util.ArrayList;
 
 public class Representant {
-
+   
 	private final int numero;
 	private final String nom;
 	private final String prenom;
 	private String adresse;
 	private float salaireFixe;
+        private ZoneGeographique secteur;
+        private ArrayList reg;
+        private float CA;
+        
 
 	public Representant(int numero, String nom, String prenom, ZoneGeographique secteur) {
 		this.numero = numero;
 		this.nom = nom;
 		this.prenom = prenom;
+                this.secteur = secteur;
 	}
-
+        
+        
+        
 	public int getNumero() {
 		return numero;
 	}
@@ -44,12 +52,16 @@ public class Representant {
 
 	public ZoneGeographique getSecteur() {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+                if (secteur.getNumero() > 0){
+                    throw new UnsupportedOperationException("Le secteur doit être une zone géographique");
+                }
+                return secteur;
+                
 	}
 
 	public void setSecteur(ZoneGeographique secteur) {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+		// TODO: Implémenter cette méthode               
+		this.secteur = secteur;
 	}
 
 	/**
@@ -66,7 +78,7 @@ public class Representant {
 			throw new IllegalArgumentException("Le montant doit être positif ou null");
 		}
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+                this.CA = montant ;
 	}
 
 	/**
@@ -77,7 +89,13 @@ public class Representant {
 	 */
 	public float salaireMensuel(int mois, float pourcentage) {
 		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+                if (mois < 0 || mois > 11) {
+			throw new IllegalArgumentException("Le mois doit être compris entre 0 et 11");
+		}
+                if (pourcentage < 0) {
+			throw new IllegalArgumentException("Le montant doit être positif ou null");
+		}
+                return salaireFixe + secteur.getIndemniteRepas() + pourcentage * CA;
 	}
 
 	@Override
